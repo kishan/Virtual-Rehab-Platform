@@ -17,10 +17,20 @@ def index(request):
 
 
 def profile(request):
-    # upcoming_appointments = Doctor.objects.order_by('-pub_date')[:5]
     profile = "temp"
     context = {'profile': profile}
     return render(request, 'dashboard/profile.html', context)
+
+
+def session(request):
+    session = "temp"
+    context = {'session': session}
+    return render(request, 'dashboard/session.html', context)
+
+def form(request):
+    form = "temp"
+    context = {'form': form}
+    return render(request, 'dashboard/form.html', context)
 
 
 # def detail(request, question_id):

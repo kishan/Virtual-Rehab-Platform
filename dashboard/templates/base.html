@@ -16,7 +16,7 @@ h3 {
     <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Virtual Rehab Platform</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -80,9 +80,9 @@ h3 {
         <!-- Logo -->
         <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>A</b>LT</span>
+          <span class="logo-mini"><b>VRP</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Admin</b>LTE</span>
+          <span class="logo-lg"><b>Virtual Rehab Platform</b></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -366,7 +366,7 @@ h3 {
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{% url 'dashboard:session' %}">
                 <i class="fa fa-calendar"></i> <span>Schedule Appointment</span> 
               </a>
             </li>
