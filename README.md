@@ -8,8 +8,17 @@ This Django platform allows the doctor to maintain communication with their pati
 excercises with the XBOX kinect to guide them through their jounrey to recovery. 
 
 * A dashboard that allows doctors to view all of his patients
+
+![alt text](screenshots/dashboard.png "Description goes here")
+
+
 * View of patient profile for the doctor to monitor the progress of each patient
+
+![alt text](screenshots/patient.png "Description goes here")
+
 * Detailed report and analysis of each session any patient has conducted with the Kinect
+
+![alt text](screenshots/session.png "Description goes here")
 
 
 And its current `requirements.txt` file is:
