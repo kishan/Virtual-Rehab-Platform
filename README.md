@@ -1,5 +1,5 @@
 # Virtual Rehab Platform
-##### Mylan Hackathon Pittsburgh - 1st place
+#### Mylan Hackathon Pittsburgh - 1st place
 
 Millions of people across the world don’t have the proper access to rehabilitation services which they need due 
 to constraints such as limited mobility or geographical barriers.
@@ -70,3 +70,8 @@ Right there, you will find the *requirements.txt* file that has all the great de
 ### 5. Runserver
 
 `python manage.py runserver`
+
+
+
+######Notes
+* more widgets can be found from https://github.com/almasaeed2010/AdminLTE
