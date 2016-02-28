@@ -1,4 +1,5 @@
 # Virtual Rehab Platform
+##### Mylan Hackathon Pittsburgh - 1st place
 
 Millions of people across the world don’t have the proper access to rehabilitation services which they need due 
 to constraints such as limited mobility or geographical barriers.
