@@ -6,7 +6,7 @@ to constraints such as limited mobility or geographical barriers.
 
 Our solution uses the XBOX kinect to allow patients to perform rehab excercises from the comfort of their home. 
 This Django platform allows the doctor to maintain communication with their patients and analyze the results of their
-excercises with the XBOX kinect to guide them through their jounrey to recovery. 
+excercises with the XBOX kinect to guide them through their journey to recovery. 
 
 * A dashboard that allows doctors to view all of his patients
 
