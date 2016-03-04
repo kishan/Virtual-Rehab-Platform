@@ -19,12 +19,18 @@ class Doctor(models.Model):
     # patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    votes = models.IntegerField(default=0)
+    
     member_since = models.DateTimeField('member since')
     title = models.CharField(max_length=2, choices=TITLE_CHOICES)
 
+    def _get_full_name(self):
+        "Returns the person's full name."
+        return 'Dr. %s %s' % (self.first_name, self.last_name)
+
+    full_name = property(_get_full_name)
+
     def __str__(self):
-        return self.name
+        return self.full_name
     
 @python_2_unicode_compatible
 class Patient(models.Model):
@@ -37,9 +43,20 @@ class Patient(models.Model):
     
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
+    def _get_full_name(self):
+        "Returns the person's full name."
+        return '%s %s' % (self.first_name, self.last_name)
+    full_name = property(_get_full_name)
+
+    # def get_age(self):
+    #     today = date.today()
+    #     # today = timezone.now()
+    #     delta = relativedelta(today, self.dob)
+    #     return str(delta.years)
+
     pub_date = models.DateTimeField('date published')
-    last_appointment = models.DateTimeField('date of last appointment')
-    age = models.IntegerField(default=0)
+    # last_appointment = models.DateTimeField(null=True)
+    # age = models.IntegerField(default=0)
     DOB = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     rehab_focus = models.CharField(max_length=20)
@@ -59,3 +76,74 @@ class Patient(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+class Appointment(models.Model):
+    patient = models.ForeignKey(Patient, blank=False, null=False)
+    doctor = models.ForeignKey(Doctor, blank=False, null=False)
+
+    # def get_patient_doctor(self):
+    #     "Returns doctor assigned to patient"
+    #     return self.patient.doctor
+    # doctor = property(get_patient_doctor)
+
+
+
+
+    app_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    # app_length = models.IntegerField(blank=False, null=False)
+    # status = models.CharField(max_length=50, blank=False, null=False)
+
+    class Meta:
+        verbose_name_plural = u'Appointment'
+
+    def __str__(self):
+        return u'Appointment : %s' % self.id
+
+    # def assign_room(self, room_id):
+    #     room = Room.objects.get(id=room_id)
+
+    #     if room.status == "Available":
+    #         room.status = "Waiting"
+    #         room.save()
+
+    #         appointment = Appointment.objects.get(patient=self.patient)
+    #         appointment.room = room
+    #         appointment.status = "ExamRoom"
+    #         appointment.save()
+
+    # def calculate_order(self):
+    #     appointments = Appointment.objects.filter(doctor=self.doctor).exclude(status="Completed", doctor_entry_time__isnull=False)
+        
+    #     try:
+    #         max_order = Appointment.objects.get(doctor=self.doctor).exclude(status="Completed", doctor_entry_time__isnull=False).order_by('-order')
+    #     except Exception, e:
+    #         max_order = 0
+        
+
+    #     if not appointments:
+    #         return 1
+    #     else:
+    #         return int(max_order) + 1
+
+    #     return 1
+
+    # def assign_next_patient(self):
+    #     available_rooms = Room.objects.filter(status="Available")
+        
+    #     if available_rooms:
+    #         selected_room = available_rooms[0]
+    #         doctors = Doctor.objects.all()
+
+    #         for doctor in doctors:
+    #             patient_queue = Appointment.objects.filter(doctor=doctor, status="WaitingRoom").order_by('order')
+
+    #             if patient_queue:
+    #                 patient_queue[0].assign_room(selected_room.id)
+    #                 return True
+
+    #     return False
+
+    # def save(self, *args, **kwargs):
+    #     super(Appointment, self).save(*args, **kwargs)

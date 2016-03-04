@@ -1,3 +1,20 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Patient, Doctor
+
+admin.site.register(Patient)
+admin.site.register(Doctor)
+
+
+
+# class ReviewAdmin(admin.ModelAdmin):
+#     model = Review
+#     list_display = ('wine', 'rating', 'user_name', 'comment', 'pub_date')
+#     list_filter = ['pub_date', 'user_name']
+#     search_fields = ['comment']
+
+
+# class ClusterAdmin(admin.ModelAdmin):
+#     model = Cluster
+#     list_display = ['name', 'get_members']
+
