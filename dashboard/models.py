@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import datetime
+from datetime import date
 from django.utils import timezone
 
 from django.db import models
@@ -48,16 +49,19 @@ class Patient(models.Model):
         return '%s %s' % (self.first_name, self.last_name)
     full_name = property(_get_full_name)
 
-    # def get_age(self):
-    #     today = date.today()
-    #     # today = timezone.now()
-    #     delta = relativedelta(today, self.dob)
-    #     return str(delta.years)
+    DOB = models.DateField()
+    def get_age(self):
+        today = date.today() 
+        delta = today - self.DOB
+        return delta.days / 365
+    age = property(get_age)
 
     pub_date = models.DateTimeField('date published')
+
+    def get_last_appointment(self):
+        return self.pub_date
     # last_appointment = models.DateTimeField(null=True)
-    # age = models.IntegerField(default=0)
-    DOB = models.DateField()
+    last_appointment = property(get_last_appointment)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     rehab_focus = models.CharField(max_length=20)
     # https://github.com/stefanfoulis/django-phonenumber-field
@@ -75,7 +79,7 @@ class Patient(models.Model):
     # was_published_recently.short_description = 'Published recently?'
 
     def __str__(self):
-        return self.name
+        return self.full_name
 
 
 
