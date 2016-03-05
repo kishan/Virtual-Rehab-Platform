@@ -2,19 +2,15 @@ from django.contrib import admin
 
 from .models import Patient, Doctor
 
-admin.site.register(Patient)
+
+
+
+class PatientAdmin(admin.ModelAdmin):
+    model = Patient
+    list_display = ('full_name', 'age', 'gender', 'previous_injuries', 'recovery_percentage', 'doctor')
+    list_filter = ['last_name', 'DOB', 'recovery_percentage', 'doctor']
+    search_fields = ['full_name']
+    readonly_fields = ["age",]
+
+admin.site.register(Patient, PatientAdmin)
 admin.site.register(Doctor)
-
-
-
-# class ReviewAdmin(admin.ModelAdmin):
-#     model = Review
-#     list_display = ('wine', 'rating', 'user_name', 'comment', 'pub_date')
-#     list_filter = ['pub_date', 'user_name']
-#     search_fields = ['comment']
-
-
-# class ClusterAdmin(admin.ModelAdmin):
-#     model = Cluster
-#     list_display = ['name', 'get_members']
-
