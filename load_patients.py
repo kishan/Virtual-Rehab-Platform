@@ -1,3 +1,14 @@
+"""
+run below command from terminal 
+
+python load_patients.py data_import/patients.csv
+
+"""
+
+
+
+
+
 import sys, os 
 import pandas as pd
 
