@@ -50,6 +50,7 @@ def save_patient_from_row(patient_row):
     next_app_date_time = next_app_date + " " + next_app_time
     patient.next_appointment = datetime.strptime(next_app_date_time, '%Y-%m-%d %H:%M')
     patient.state = patient_row[19]
+    patient.status = patient_row[20]
 
     patient.save()
     
