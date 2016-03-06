@@ -130,21 +130,26 @@
                             <h3 class="box-title">Recovery Completeness</h3>
                           </div> -->
                           <div class="box-body">
-                            <p style="font-size:30px;">Recovery Completeness - 46%</p>
+                            <!-- <p style="font-size:30px;">Recovery Completeness - 46%</p> -->
+                            <p style="font-size:30px;">Recovery Completeness - {{ patient.recovery_percentage}}%</p>
                             <div style="background-color:white" class="progress active">
-                              <div class="progress-bar progress-bar-red progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 35%">
+
+                              <div class="progress-bar progress-bar-red progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{stage1_percentage}}%">
                                 <span class="">Stage 1</span>
-                            </div>
+                              </div>
 
-                            
-
-                              <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                              <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: {{stage2_percentage}}%">
                                 <span class="">Stage 2</span>
                               </div>
 
-                            <!-- <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                              <!-- <div class="progress-bar progress-bar-red progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 35%">
                                 <span class="">Stage 1</span>
+                              </div>
+
+                              <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                                <span class="">Stage 2</span>
                               </div> -->
+
                               
                               
                             </div>

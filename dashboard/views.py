@@ -25,8 +25,17 @@ def index(request):
 
 def profile(request, patient_id):
     patient = Patient.objects.get(id = patient_id)
+    recovery_percentage = patient.recovery_percentage
+    if recovery_percentage < 20:
+        stage1_percentage = recovery_percentage
+        stage2_percentage = 0
+    else:
+        stage1_percentage = recovery_percentage * (0.7)
+        stage2_percentage = recovery_percentage * (0.3)
     context = {
-        'patient': patient
+        'patient': patient,
+        'stage1_percentage':stage1_percentage,
+        'stage2_percentage':stage2_percentage
         }
     return render(request, 'dashboard/profile.html', context)
 
