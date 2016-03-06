@@ -34,8 +34,8 @@ def save_patient_from_row(patient_row):
     street = patient_row[8]
     city = patient_row[9]
     state = patient_row[10]
-
     patient.address = street + ", " + city + ", " + state
+
     patient.previous_injuries = patient_row[11]
     patient.notes = patient_row[12]
     patient.recovery_percentage = patient_row[13]
@@ -49,6 +49,7 @@ def save_patient_from_row(patient_row):
     next_app_time = patient_row[18] # h:m
     next_app_date_time = next_app_date + " " + next_app_time
     patient.next_appointment = datetime.strptime(next_app_date_time, '%Y-%m-%d %H:%M')
+    patient.status = patient_row[19]
 
     patient.save()
     

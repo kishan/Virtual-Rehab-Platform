@@ -12,9 +12,8 @@ from .models import Patient
 
 
 def index(request):
-    # upcoming_appointments = Doctor.objects.order_by('-pub_date')[:5]
-    upcoming_appointments = "temp"
-    # patient_list = Patient.objects.get(doctor_id = "1")
+    # upcoming_appointments = Patient.objects.get(doctor_id = "1")
+    upcoming_appointments = Patient.objects.filter(status="Active").order_by('next_appointment')
     patient_list = Patient.objects.all()
     context = {
         'upcoming_appointments': upcoming_appointments,
