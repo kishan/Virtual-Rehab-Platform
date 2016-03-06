@@ -60,8 +60,8 @@ class Patient(models.Model):
 
     def get_last_appointment(self):
         return self.pub_date
-    # last_appointment = models.DateTimeField(null=True)
-    last_appointment = property(get_last_appointment)
+    last_appointment = models.DateTimeField(null=True, blank=True)
+    # last_appointment = property(get_last_appointment)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     rehab_focus = models.CharField(max_length=20)
     # https://github.com/stefanfoulis/django-phonenumber-field
@@ -71,6 +71,7 @@ class Patient(models.Model):
     notes = models.CharField(max_length=200)
     recovery_percentage = models.IntegerField(default=0)
     dummy_image = models.CharField(max_length=200, default="http://pixel.nymag.com/imgs/daily/intelligencer/2015/08/10/10-donald-trump-debate.w750.h560.2x.jpg")
+    next_appointment = models.DateTimeField(null=True, blank=True)
 
     def visited_last_week(self):
         return self.last_appointment >= timezone.now() - datetime.timedelta(days=7)

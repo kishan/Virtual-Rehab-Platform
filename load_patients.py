@@ -9,6 +9,10 @@ python load_patients.py data_import/patients.csv
 import sys, os 
 import pandas as pd
 
+import datetime
+from datetime import datetime ,date , time
+
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "rehab_platform.settings")
 
 import django
@@ -40,7 +44,11 @@ def save_patient_from_row(patient_row):
     dummy_image = patient_row[15]
     patient.dummy_image = dummy_image
     last_appointment = patient_row[16]
-    next_appointment = patient_row[17]
+    patient.last_appointment = last_appointment
+    next_app_date = patient_row[17] #YYYY-mm-dd
+    next_app_time = patient_row[18] # h:m
+    next_app_date_time = next_app_date + " " + next_app_time
+    patient.next_appointment = datetime.strptime(next_app_date_time, '%Y-%m-%d %H:%M')
 
     patient.save()
     
