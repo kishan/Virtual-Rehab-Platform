@@ -42,7 +42,7 @@ class Patient(models.Model):
         ('Female', 'Female'),
     )
 
-    STATUS = (
+    STATE = (
         ('Active', 'Active'),
         ('Recovered', 'Recovered'),
     )
@@ -77,7 +77,7 @@ class Patient(models.Model):
     recovery_percentage = models.IntegerField(default=0)
     dummy_image = models.CharField(max_length=200, default="http://pixel.nymag.com/imgs/daily/intelligencer/2015/08/10/10-donald-trump-debate.w750.h560.2x.jpg")
     next_appointment = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=9, default = "Active", choices=STATUS)
+    state = models.CharField(max_length=9, default = "Active", choices=STATE)
 
     def visited_last_week(self):
         return self.last_appointment >= timezone.now() - datetime.timedelta(days=7)

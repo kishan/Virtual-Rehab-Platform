@@ -13,11 +13,13 @@ from .models import Patient
 
 def index(request):
     # upcoming_appointments = Patient.objects.get(doctor_id = "1")
-    upcoming_appointments = Patient.objects.filter(status="Active").order_by('next_appointment')
+    upcoming_appointments = Patient.objects.filter(state="Active").order_by('next_appointment')
     patient_list = Patient.objects.all()
+    num_of_active_patients = Patient.objects.filter(state="Active").count()
     context = {
         'upcoming_appointments': upcoming_appointments,
-        'patient_list': patient_list
+        'patient_list': patient_list,
+        'num_of_active_patients': num_of_active_patients
         }
     return render(request, 'dashboard/index.html', context)
 
