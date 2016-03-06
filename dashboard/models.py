@@ -38,8 +38,8 @@ class Patient(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
 
     GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     )
     
     first_name = models.CharField(max_length=20)
@@ -70,6 +70,7 @@ class Patient(models.Model):
     previous_injuries = models.CharField(max_length=50)
     notes = models.CharField(max_length=200)
     recovery_percentage = models.IntegerField(default=0)
+    dummy_image = models.CharField(max_length=200, default="http://pixel.nymag.com/imgs/daily/intelligencer/2015/08/10/10-donald-trump-debate.w750.h560.2x.jpg")
 
     def visited_last_week(self):
         return self.last_appointment >= timezone.now() - datetime.timedelta(days=7)

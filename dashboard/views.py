@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 
+from .models import Patient
+
 
 # from .models import Choice, Question
 
@@ -12,13 +14,20 @@ from django.core.urlresolvers import reverse
 def index(request):
     # upcoming_appointments = Doctor.objects.order_by('-pub_date')[:5]
     upcoming_appointments = "temp"
-    context = {'upcoming_appointments': upcoming_appointments}
+    # patient_list = Patient.objects.get(doctor_id = "1")
+    patient_list = Patient.objects.all()
+    context = {
+        'upcoming_appointments': upcoming_appointments,
+        'patient_list': patient_list
+        }
     return render(request, 'dashboard/index.html', context)
 
 
-def profile(request):
-    profile = "temp"
-    context = {'profile': profile}
+def profile(request, patient_id):
+    patient = Patient.objects.get(id = patient_id)
+    context = {
+        'patient': patient
+        }
     return render(request, 'dashboard/profile.html', context)
 
 

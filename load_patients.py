@@ -6,9 +6,6 @@ python load_patients.py data_import/patients.csv
 """
 
 
-
-
-
 import sys, os 
 import pandas as pd
 
@@ -30,12 +27,20 @@ def save_patient_from_row(patient_row):
     patient.gender = patient_row[5]
     patient.rehab_focus = patient_row[6]
     patient.phone_number = patient_row[7]
-    patient.address = patient_row[8]
-    patient.previous_injuries = patient_row[9]
-    patient.notes = patient_row[10]
-    patient.recovery_percentage = patient_row[11]
-    doctor_id = patient_row[12]
+    street = patient_row[8]
+    city = patient_row[9]
+    state = patient_row[10]
+
+    patient.address = street + ", " + city + ", " + state
+    patient.previous_injuries = patient_row[11]
+    patient.notes = patient_row[12]
+    patient.recovery_percentage = patient_row[13]
+    doctor_id = patient_row[14]
     patient.doctor = Doctor.objects.get(pk=doctor_id)
+    dummy_image = patient_row[15]
+    patient.dummy_image = dummy_image
+    last_appointment = patient_row[16]
+    next_appointment = patient_row[17]
 
     patient.save()
     

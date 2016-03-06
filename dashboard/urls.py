@@ -7,7 +7,9 @@ app_name = 'dashboard'
 urlpatterns = [
     # ex: /polls/
     url(r'^$', views.index, name='index'),
-    url(r'^profile/$', views.profile, name='profile'),
+    # url(r'^profile/(?P<patient_id>[0-9]+)/$', views.profile, name='profile'),
+    url(r'^profile/([0-9]+)/$', views.profile, name='profile'),
+    # url(r'^profile/$', views.profile, name='profile'),
     url(r'^session/$', views.session, name='session'),
     url(r'^form/$', views.form, name='form'),
     # ex: /polls/5/

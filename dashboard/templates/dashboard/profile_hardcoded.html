@@ -35,28 +35,22 @@
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <!-- <img class="profile-user-img img-responsive img-circle" src="/static/dist/img/user4-128x128.jpg" alt="User profile picture"> -->
-                  <img class="profile-user-img img-responsive img-circle" src="{{ patient.dummy_image }}" alt="User profile picture">
-                  <!-- <h3 class="profile-username text-center">Nina Mcintire</h3> -->
-                  <h3 class="profile-username text-center">{{ patient.full_name }}</h3>
+                  <img class="profile-user-img img-responsive img-circle" src="/static/dist/img/user4-128x128.jpg" alt="User profile picture">
+                  <h3 class="profile-username text-center">Nina Mcintire</h3>
                   <!-- <p class="text-muted text-center">Software Engineer</p> -->
 
                   <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                      <!-- <b>Age</b> <a class="pull-right">20</a> -->
-                      <b>Age</b> <a class="pull-right">{{ patient.age }}</a>
+                      <b>Age</b> <a class="pull-right">20</a>
                     </li>
                     <li class="list-group-item">
-                      <!-- <b>Date of Birth</b> <a class="pull-right">1/23/1996</a> -->
-                      <b>Date of Birth</b> <a class="pull-right">{{ patient.DOB|date:'n/j/Y' }}</a>
+                      <b>Date of Birth</b> <a class="pull-right">1/23/1996</a>
                     </li>
                     <li class="list-group-item">
-                      <!-- <b>Gender</b> <a class="pull-right">Female</a> -->
-                      <b>Gender</b> <a class="pull-right">{{ patient.gender }}</a>
+                      <b>Gender</b> <a class="pull-right">Female</a>
                     </li>
                     <li class="list-group-item">
                       <b>Rehab Focus</b> <a class="pull-right">Right Arm</a>
-                      <!-- <b>Rehab Focus</b> <a class="pull-right">{{ patient.rehab_focus }}m</a> -->
                     </li>
                     <!-- <li class="list-group-item">
                       <b>Duration Since Start</b> <a class="pull-right">2 weeks</a>
@@ -82,27 +76,23 @@
 
 
                   <strong><i class="fa fa-phone margin-r-5"></i> Phone Number</strong>
-                  <!-- <p class="text-muted">735-251-1924</p> -->
-                  <p class="text-muted">{{ patient.phone_number}}</p>
+                  <p class="text-muted">735-251-1924</p>
 
                   <hr>
 
 
                   <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
-                  <!-- <p class="text-muted">10 Main Street, Pittsburgh, PA 15213</p> -->
-                  <p class="text-muted">{{ patient.address}}</p>
+                  <p class="text-muted">10 Main Street, Pittsburgh, PA 15213</p>
 
                   <hr>
 
                   <strong><i class="fa fa-history margin-r-5"></i> Previous Injuries</strong>
-                  <!-- <p class="text-muted">None</p> -->
-                  <p class="text-muted">{{ patient.previous_injuries}}</p>
+                  <p class="text-muted">None</p>
 
                   <hr>
 
                   <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                  <!-- <p>Injured right arm in car accident. X-rays completed with no sign of major injury, just soft tissue damage. Subscribed daily painkillers.</p> -->
-                  <p>{{ patient.notes }}</p>
+                  <p>Injured right arm in car accident. X-rays completed with no sign of major injury, just soft tissue damage. Subscribed daily painkillers.</p>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
