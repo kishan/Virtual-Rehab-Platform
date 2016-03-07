@@ -93,33 +93,128 @@ class Patient(models.Model):
     # was_published_recently.boolean = True
     # was_published_recently.short_description = 'Published recently?'
 
+
+    class Meta:
+        ordering = ['last_name']
+
     def __str__(self):
         return self.full_name
 
 
-
-class Appointment(models.Model):
-    patient = models.ForeignKey(Patient, blank=False, null=False)
-    doctor = models.ForeignKey(Doctor, blank=False, null=False)
+class Rehab_Session(models.Model):
+    """workout session scheduled for patient to do at home"""
+    patient = models.ForeignKey(Patient, blank=False, null=False, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, blank=False, null=True)
 
     # def get_patient_doctor(self):
     #     "Returns doctor assigned to patient"
     #     return self.patient.doctor
     # doctor = property(get_patient_doctor)
 
+    STATUS = (
+        ('Upcoming', 'Upcoming'),
+        ('Missed', 'Missed'),
+        ('Completed', 'Completed'),
+    )
 
+    app_date_time = models.DateTimeField(default=datetime.datetime.now())
+    app_length = models.IntegerField(blank=False, null=False, default=30)
+    status = models.CharField(max_length=50, default= "Upcoming", choices=STATUS)
 
+    def get_overall_accuracy(self):
+        return 99.99
 
-    app_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    # app_length = models.IntegerField(blank=False, null=False)
-    # status = models.CharField(max_length=50, blank=False, null=False)
+    def get_overall_range_of_motion(self):
+        return 79.99
+
+    def get_exercise_categories(self):
+        dic = {
+            "Shoulder":35,
+            "Arm": 65
+        }
+
+        return dic
+
+    overall_accuracy = property(get_overall_accuracy)
+    overall_range_of_motion = property(get_overall_range_of_motion)
+    exercise_categories = property(get_exercise_categories)
+
+    def get_appointments_for_patient(self, patient_id):
+        # appointments = appointments.objects.get(patient=self.patient)
+        # appointments = appointments.objects.filter(patient.id = patient_id)
+        appointments = Patient.objects.get(id=patient_id).book_set.all()
 
     class Meta:
         verbose_name_plural = u'Appointment'
 
     def __str__(self):
-        return u'Appointment : %s' % self.id
+        return u'Rehab_Session : %s for %s' % (self.id, self.patient.full_name)
 
+class Exercise_Set(models.Model):
+    """ set of excercises
+        Ex. 3 sets of 15 reps of Arm Raises
+    """
+    rehab_session = models.ForeignKey(Rehab_Session, on_delete=models.CASCADE)
+    # Exercise
+
+    EXERCISE_CHOICES = (
+    ('Arm', (
+            (1, 'Forward Bicep Curl'),
+            (2, 'Side Bicep Curl'),
+        )
+    ),
+    ('Shoulder', (
+            (101, 'Front Arm Raise'),
+            (102, 'Lateral Arm Raise'),
+        )
+    ),
+    ('Back', (
+            (201, 'Scapular Squeeze'),
+            (202, 'Thoracic Extension'),
+        )
+    ),
+    ('Leg', (
+            (301, 'Standing Hamstring Curl'),
+            (302, 'Sit to Stand'),
+        )
+    ),
+    ('Knee', (
+            (401, 'Assisted Knee Flexion'),
+            (402, 'Prolonged Knee Extension'),
+        )
+    ),
+
+    )   
+
+    exercise = models.CharField(max_length=200, default= 401, choices=EXERCISE_CHOICES)
+
+    sets_total = models.IntegerField(blank=False, null=False, default=3)
+    sets_completed = models.IntegerField(blank=True, null=True)
+    reps_total = models.IntegerField(blank=False, null=False, default=15)
+    reps_completed = models.IntegerField(blank=True, null=True)
+    accuracy = models.IntegerField(blank=True, null=True)
+    range_of_motion = models.IntegerField(blank=True, null=True)
+
+
+    def __str__(self):
+        return u'Set for %s' % (self.rehab_session)
+
+"""
+class Exercise(models.Model):
+    exercise_set = models.ManyToManyField(Exercise_Set)
+
+    EXERCISE_CATERGORIES = (
+        ('Arm', 'Arm'),
+        ('Shoulder', 'Shoulder'),
+        ('Back', 'Back'),
+        ('Leg', 'Leg'),
+        ('Knee', 'Knee'),
+    )
+
+    name = models.CharField(max_length=50)
+    category = models.CharField(max_length=50, choices=EXERCISE_CATERGORIES)
+"""
+        
     # def assign_room(self, room_id):
     #     room = Room.objects.get(id=room_id)
 
@@ -166,3 +261,4 @@ class Appointment(models.Model):
 
     # def save(self, *args, **kwargs):
     #     super(Appointment, self).save(*args, **kwargs)
+
