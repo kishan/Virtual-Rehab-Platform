@@ -16,7 +16,7 @@ class Rehab_Session_Admin(admin.ModelAdmin):
 
 
 class Exercise_Set_Admin(admin.ModelAdmin):
-    model = Exercise
+    model = Exercise_Set
     list_display = ('rehab_session','get_exercise_display', 'sets_total', 'sets_completed',
      'reps_total','reps_completed', 'accuracy', 'range_of_motion')
 
@@ -24,4 +24,4 @@ admin.site.register(Patient, Patient_Admin)
 admin.site.register(Doctor)
 admin.site.register(Rehab_Session, Rehab_Session_Admin)
 admin.site.register(Exercise_Set, Exercise_Set_Admin)
-admin.site.register(Exercise)
+# admin.site.register(Exercise)
