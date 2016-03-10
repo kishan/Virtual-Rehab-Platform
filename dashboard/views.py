@@ -16,7 +16,9 @@ def index(request):
     upcoming_appointments = Patient.objects.filter(state="Active").order_by('next_appointment')
     patient_list = Patient.objects.all()
     num_of_active_patients = Patient.objects.filter(state="Active").count()
+    next_appointment_time = " 5 min."
     context = {
+        'next_appointment_time':next_appointment_time,
         'upcoming_appointments': upcoming_appointments,
         'patient_list': patient_list,
         'num_of_active_patients': num_of_active_patients
