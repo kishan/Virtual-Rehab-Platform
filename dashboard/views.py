@@ -6,6 +6,11 @@ from django.core.urlresolvers import reverse
 
 from .models import Patient
 
+import datetime
+from datetime import timedelta
+from django.utils.timezone import utc
+
+
 
 # from .models import Choice, Question
 
@@ -16,9 +21,23 @@ def index(request):
     upcoming_appointments = Patient.objects.filter(state="Active").order_by('next_appointment')
     patient_list = Patient.objects.all()
     num_of_active_patients = Patient.objects.filter(state="Active").count()
-    next_appointment_time = " 5 min."
+
+    # find time until next appointment
+    if len(upcoming_appointments) == 0:
+        time_until_next_app = "N/A"
+    else:
+        next_appointment_date = upcoming_appointments[0].next_appointment
+        now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        until_next_app = next_appointment_date - now
+        if until_next_app.days > 0:
+            time_until_next_app = str(until_next_app.days) + " days"
+        elif (until_next_app.seconds//3600) > 0 :
+            time_until_next_app = str(until_next_app.seconds//3600) + " hours"
+        else:
+            time_until_next_app = str((until_next_app.seconds//60)%60) + " min"
+
     context = {
-        'next_appointment_time':next_appointment_time,
+        'time_until_next_app':time_until_next_app,
         'upcoming_appointments': upcoming_appointments,
         'patient_list': patient_list,
         'num_of_active_patients': num_of_active_patients
